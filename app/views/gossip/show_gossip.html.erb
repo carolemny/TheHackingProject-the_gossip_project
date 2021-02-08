@@ -1,0 +1,8 @@
+<div class="container">
+  <h1><%= @gossip.title%></h1>
+  <div>
+   <p><%= @gossip.content%></p><br>
+    <p><%= @gossip.created_at.strftime("%e %B %Y à %H:%M:%S")%></p>
+  </div>
+  <div><%= link_to "Voir la balance", show_user_path(@gossip.user.id) %></div>
+</div>

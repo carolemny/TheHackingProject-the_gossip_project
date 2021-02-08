@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_04_194023) do
+ActiveRecord::Schema.define(version: 2021_02_04_184246) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
     t.string "zip_code"
@@ -24,22 +27,13 @@ ActiveRecord::Schema.define(version: 2021_02_04_194023) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_gossips_on_user_id"
   end
 
-  create_table "join_table_pm_recipients", force: :cascade do |t|
-    t.integer "private_message_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["private_message_id"], name: "index_join_table_pm_recipients_on_private_message_id"
-    t.index ["user_id"], name: "index_join_table_pm_recipients_on_user_id"
-  end
-
   create_table "join_table_tag_gossips", force: :cascade do |t|
-    t.integer "gossip_id"
-    t.integer "tag_id"
+    t.bigint "gossip_id"
+    t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["gossip_id"], name: "index_join_table_tag_gossips_on_gossip_id"
@@ -50,8 +44,6 @@ ActiveRecord::Schema.define(version: 2021_02_04_194023) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sender_id"
-    t.index ["sender_id"], name: "index_private_messages_on_sender_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -68,8 +60,10 @@ ActiveRecord::Schema.define(version: 2021_02_04_194023) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "city_id"
+    t.bigint "city_id"
     t.index ["city_id"], name: "index_users_on_city_id"
   end
 
+  add_foreign_key "gossips", "users"
+  add_foreign_key "users", "cities"
 end
