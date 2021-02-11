@@ -1,4 +1,14 @@
-<div class="container">
-  <h1>Bienvenue, <%= params["first_name"] %></h1>
-  <p>Ici c'est notre super site de potins, il est chouette, non ?</p>
+<div class="jumbotron jumbotron-fluid change">
+  <div class="container">
+    <h1>Bienvenue<% if logged_in? == true %>, <%= current_user.first_name %> <% end %></h1>
+    <p>Ici c'est notre super site de potins : tu peux espionner, balancer, commérer...</p>
+  </div>
+</div>
+
+<div>
+  <% if flash[:notice] %>
+    <div class="alert alert-success" role="alert">
+      <p id=notice> <%= notice %></p>
+    </div>
+  <% end %>
 </div>

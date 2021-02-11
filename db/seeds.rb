@@ -20,16 +20,15 @@ City.create(cities.map { |elem| elem.as_json })
 
 #Users
 NB_USERS.times do
-  users << User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, city_id: Faker::Number.between(from: 1, to: NB_CITIES), email: Faker::Internet.email, age: Faker::Number.between(from: 13, to: 70), description: Faker::Lorem.paragraph(sentence_count: 3, supplemental: true))
+  users << User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, city_id: Faker::Number.between(from: 1, to: NB_CITIES), email: Faker::Internet.email, age: Faker::Number.between(from: 13, to: 70), description: Faker::Lorem.paragraph(sentence_count: 3, supplemental: true), password: Faker::Internet.password(min_length: 6))
 end
-User.create(users.map { |elem| elem.as_json })
 
 #Gossips
 NB_GOSSIPS.times do
-  gossip_ary << Gossip.new(content: Faker::Lorem.paragraph(sentence_count: 5, supplemental: true), title: Faker::TvShows::StrangerThings.quote, user_id: Faker::Number.between(from: 1, to: NB_USERS))
+  gossip_ary << Gossip.new(content: Faker::Lorem.paragraph(sentence_count: 5, supplemental: true), title: Faker::Book.title[0..13], user_id: Faker::Number.between(from: 1, to: NB_USERS))
 end
 
-#Tags
+#Tagss[]
 NB_TAGS.times do
   t = Tag.create(title: Faker::Lorem.word)
   tag_ary << t
@@ -45,7 +44,7 @@ end
 Gossip.create(gossip_ary.map { |elem| elem.as_json })
 
 #NB_PRIVATE_MESSAGES.times do
-#  pm = PrivateMessage.new(content: Faker::Lorem.paragraph(sentence_count: 5, supplemental: true), sender_id: Faker::Number.between(from: 1, to: NB_USERS))
+#  pm = PrivateMessage.new(content: Faker::Lorem.paragraph(sentence_count: 5, supplemental: true), sender_id: Faker::Number.betweenfrom: 1, to: NB_USERS))
 #  n = Faker::Number.between(from: 1, to: 5)
 #  n.times do
 #    JoinTablePmRecipient.create(user_id: Faker::Number.between(from: 1, to: NB_USERS), private_message_id:pm.id)

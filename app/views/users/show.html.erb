@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card text-center">
+    <%= image_tag("user.jpg") %>
+    <div class="card-body">
+      <h5 class="card-title"><%=@user.first_name%> <%= @user.last_name%></h5>
+      <p class="card-text"><%= @user.description%></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">J'ai <%= @user.age%> ans, je vis à <%= @city %> <%= link_to "Voir la ville", city_path(@user.city_id), class:"btn btn-muted" %></li>
+      <li class="list-group-item">Contacte moi : <%= @user.email%></li>
+    </ul>
+  </div>
+</div>

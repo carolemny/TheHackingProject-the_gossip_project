@@ -1,0 +1,23 @@
+<div class="container">
+  <% if @gossip.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <p >We failed to update the gossip for the following reason(s) :</p>
+      <ul>
+       <% @gossip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+       <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h1>Éditer un Potin</h1>
+  <%= form_for @gossip do |f| %>
+      <div class="form-group">
+      <div><%= label_tag 'Modifie le titre de ton potin :' %></div>
+      <div><%= f.text_field :title, class: "form-control" %></div>
+      <div><%= label_tag 'Modifie le contenu de ton potin :' %></div>
+      <div><%= f.text_area :content, class: "form-control" %></div>
+      <div><button type="submit" class="btn btn-secondary">C'est parti...</button></div>
+    </div>
+  <% end %>
+</div>

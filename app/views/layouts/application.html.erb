@@ -5,35 +5,50 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="">The Gossip Project</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <%= link_to "", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Nos potins", gossips_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "L'Équipe", team_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Contact", contact_path, class:"nav-link" %>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/welcome">The Gossip Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <%= link_to "", class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Nos potins", gossips_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "L'Équipe", team_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Contact", contact_path, class:"nav-link" %>
+            </li>
+            <% if logged_in? == false %>
+            <li class="nav-item">
+              <%= link_to "S'inscrire", new_user_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Se connecter", new_session_path, class:"nav-link" %>
+            </li>
+            <% end %>
+            <% if logged_in? == true %>
+            <li >
+              <%= link_to "Se déconnecter", session_path(session.id), method: :delete, class: "nav-link danger" %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </div>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header"><%= @gossip.title%></div>
+    <div class="card-body">
+      <p class="card-text"><%= @gossip.content%></p>
+      <%= link_to "Voir le profil de la balance", user_path(@gossip.user.id), class:"btn btn-success" %> 
+      <%= link_to "Voir la ville, et ses potins", city_path(@gossip.user.city_id), class:"btn btn-secondary" %> 
+      <%= link_to "Faire disparaître", gossip_path(@gossip.id), class:"btn btn-danger", :method => :delete, data: { confirm: "C'est ton dernier mot ?" } %>
+    </div>
+    <div class="card-footer text-muted"><p>Créé à <%= @city %> par <%= @gossip.user.first_name%>, le <%= @gossip.created_at.strftime("%e.%m.%Y à %H:%M")%></p></div>
+  </div>
+</div>

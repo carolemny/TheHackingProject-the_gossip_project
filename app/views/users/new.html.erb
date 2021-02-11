@@ -1,0 +1,33 @@
+<div class="container">
+    <% if @user.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <p >We failed to create the gossip for the following reason(s) :</p>
+      <ul>
+       <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+       <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h1>Devenir une balance</h1>
+  <div>
+    <%= form_tag url_for(action: 'create'), method: "post" do %>
+        <div><%= label_tag 'Quel est ton prénom ?' %></div>
+        <div><%= text_field_tag 'first_name', @user.first_name, class: "form-control" %><br></div>
+        <div><%= label_tag 'Quel est ton nom ?' %></div>
+        <div><%= text_field_tag 'last_name', @user.last_name, class: "form-control" %><br></div>
+        <div><%= label_tag 'Quel est ton âge ?' %></div>
+        <div><%= text_field_tag 'age', @user.age, class: "form-control" %><br></div>
+        <div><%= label_tag 'Choisis la ville la plus proche de chez toi :' %></div>
+        <div><%= select_tag 'city', options_from_collection_for_select(City.all, "id", "name", @user.city), class: "form-control"%><br></div>
+        <div><%= label_tag 'Décris-toi en quelques mots :' %></div>
+        <div><%= text_area_tag 'description', @user.description, class: "form-control" %><br></div>
+        <div><%= label_tag 'Donne-nous un email :' %></div>
+        <div><%= text_field_tag 'email', @user.email, class: "form-control" %><br></div>
+        <div><%= label_tag 'Choisis ton mot de passe :' %></div>
+        <div><%= text_field_tag 'password', @user.password, class: "form-control" %><br></div>
+        <%= submit_tag "Valider", class: "btn btn-secondary"%>
+    <% end %>
+  </div>
+</div>

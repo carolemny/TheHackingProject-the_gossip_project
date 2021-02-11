@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="card text-center">
+    <%= image_tag("city.jpg") %>
+    <div class="card-body">
+      <h5 class="card-title"><%= @city.name %></h5>
+      <p class="card-text"><%= @city.zip_code %></p>
+      
+      <ul class="list-group list-group-flush">
+        <% Gossip.all.each do |gossip| %>
+          <% if City.find(gossip.user.city_id).name == @city.name %>
+            <li class="list-group-item">
+              <div><%= gossip.title %></div>
+              <div><%= gossip.user.first_name %></div>
+              <div><%= link_to "Afficher le potin", gossip_path(gossip.id), class: "btn btn-secondary" %></div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,25 @@
 /* Ajout du CSS */
-body{
-  font-family: 'Roboto', sans-serif;
-  padding: 0.5em;
+
+.container{
+  padding: 1em;
 }
-h1 {
-  padding: 1em 0em;
+.btn{
+  margin: 1em 0.5em;
+}
+.change{
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+  background: url(jumbotron2.jpg) no-repeat center;
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  color: rgb(255, 255, 255);
+}
+.container h1{
+  padding-bottom: 0.5em;
+  font-weight: bold;
+}
+#notice{
+  text-align: center;
 }
