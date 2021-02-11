@@ -1,4 +1,7 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, only: [:create, :new]
+  before_action :authenticate_author, only: [:destroy, :edit, :update]
+  
   def index
     @all_gossips = Gossip.all
   end
@@ -13,13 +16,13 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new(user_id: User.all.sample.id, content: params["content"], title: params["title"])
+    @gossip = Gossip.new(content: params["content"], title: params["title"])
     @gossip.user = current_user
     if @gossip.save # essaie de sauvegarder en base @gossip
       flash[:notice] = "Bravo, votre potin est enregistré !" # affiche une alerte
       redirect_to gossips_path # si ça marche, il redirige vers la page d'index du site
     else # sinon, il render la view new
-      render :new 
+      render :new
       return
     end
   end
@@ -50,5 +53,20 @@ class GossipsController < ApplicationController
 
   def gossip_params
     params.require(:gossip).permit(:title, :content)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
+  def authenticate_author
+    @gossip = Gossip.find(params[:id])
+    unless @gossip.user == current_user
+      flash[:danger] = "You are not allowed to edit this gossip."
+      redirect_to gossips_path
+    end
   end
 end

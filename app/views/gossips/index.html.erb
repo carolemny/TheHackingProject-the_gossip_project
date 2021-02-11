@@ -3,6 +3,14 @@
   <div><%= link_to "Créer un potin", new_gossip_path, class:"btn btn-success" %></div>
 
   <div>
+    <% if flash[:danger] %>
+      <div class="alert alert-danger" role="alert">
+        <p id=danger> <%=  flash[:danger] %></p>
+      </div>
+    <% end %>
+  </div>
+  
+  <div>
     <% if flash[:notice] %>
       <div class="alert alert-success" role="alert">
         <p id=notice> <%= notice %></p>
@@ -16,7 +24,12 @@
     <div class="card text-center bg-light mb-3">
       <div class="card-header" id="author"><%= gossip.user.first_name %></div>
       <div class="card-body"><p class="card-text" id="content"><%= gossip.title %></p></div>
-      <div><!--<i class="far fa-hand-point-right"></i>--><%= link_to "Afficher le potin", gossip_path(gossip.id), class:"btn btn-secondary" %> <%= link_to "Modifier le potin", edit_gossip_path(gossip.id), class:"btn btn-secondary" %></div>
+      <div>
+        <%= link_to "Afficher le potin", gossip_path(gossip.id), class:"btn btn-secondary" %> 
+        <% if logged_in? == true && current_user == gossip.user %>
+        <%= link_to "Modifier le potin", edit_gossip_path(gossip.id), class:"btn btn-secondary" %>
+        <% end %>
+      </div>
     </div>
   <%end%>
 </div>
