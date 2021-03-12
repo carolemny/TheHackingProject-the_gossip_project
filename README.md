@@ -1,4 +1,4 @@
->> Le mega Gossip project <<
+# Le mega Gossip project
 
 Sur ce super réseau social, un utilisateur va s'inscrire, renseigner son prénom et nom, son mail et son age, puis il précisera sa ville avec une recherche par code postal.
 Il aura ensuite toutes les fonctionnalités qui feront de cette appli une future licorne de la Bitchin'Tech :
